@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>June Etsy 6-Shop Production Calendar</title>
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --card: #ffffff;
+      --ink: #241f1c;
+      --muted: #746b64;
+      --line: #ded3c8;
+      --accent: #9a5f3f;
+      --accent-dark: #6f3f28;
+      --soft: #efe4d8;
+      --green: #dff0df;
+      --yellow: #fff0c2;
+      --red: #f7d7d2;
+      --blue: #dfeaf6;
+      --purple: #eadff6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    header {
+      padding: 34px 28px 24px;
+      background: linear-gradient(135deg, #fff, var(--soft));
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1, h2, h3 { margin: 0; }
+
+    h1 { font-size: 32px; letter-spacing: -0.8px; }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 900px;
+    }
+
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(60, 41, 30, 0.05);
+    }
+
+    .metric {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--accent-dark);
+      margin-top: 6px;
+    }
+
+    .label {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 30px 0 14px;
+      font-size: 22px;
+    }
+
+    .rule-box {
+      border-left: 5px solid var(--accent);
+      background: #fffaf5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fbf6f1;
+      color: var(--accent-dark);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day-name {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 0;
+    }
+
+    .day {
+      min-height: 210px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      position: relative;
+    }
+
+    .date {
+      font-weight: 800;
+      color: var(--accent-dark);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .phase {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .setup { background: var(--blue); }
+    .prod { background: var(--green); }
+    .qa { background: var(--yellow); }
+    .off { background: #eeeeee; color: #777; }
+    .risk { background: var(--red); }
+    .brand { background: var(--purple); }
+
+    ul {
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+
+    li { margin-bottom: 5px; }
+
+    .small { font-size: 12px; color: var(--muted); }
+
+    .shop-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: white;
+      background: var(--accent);
+      border-radius: 6px;
+      padding: 3px 7px;
+      margin-right: 4px;
+      margin-bottom: 6px;
+    }
+
+    .progress {
+      height: 10px;
+      background: #eee4dc;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 100%;
+      background: var(--accent);
+      width: var(--w);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .footer {
+      margin: 28px 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1000px) {
+      .summary-grid, .two-col { grid-template-columns: 1fr 1fr; }
+      .calendar { grid-template-columns: 1fr; }
+      .day-name { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .summary-grid, .two-col { grid-template-columns: 1fr; }
+      header { padding: 24px 18px; }
+      .wrap { padding: 16px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .card, .day { box-shadow: none; break-inside: avoid; }
+      .calendar { grid-template-columns: repeat(7, 1fr); }
+      .day { min-height: 185px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>June 2026 Etsy Production Calendar</h1>
+    <p class="subtitle">Goal: launch 6 shops in June. Team works mostly one shop at a time. June 1–3 is protected for product research, pricing, branding, shop setup, SOPs, and admin work before production starts.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="grid summary-grid">
+      <div class="card">
+        <div class="label">June Shop Goal</div>
+        <div class="metric">6</div>
+        <div class="note">50 listings per shop</div>
+      </div>
+      <div class="card">
+        <div class="label">Total Listings</div>
+        <div class="metric">300</div>
+        <div class="note">6 × 50 listings</div>
+      </div>
+      <div class="card">
+        <div class="label">Daily Editing Quota</div>
+        <div class="metric">20</div>
+        <div class="note">8 full-time + 7 part-time + 5 you</div>
+      </div>
+      <div class="card">
+        <div class="label">Work Rhythm</div>
+        <div class="metric">6/5</div>
+        <div class="note">You + full-time: 6 days. Part-time: 5 days.</div>
+      </div>
+    </section>
+
+    <section class="card rule-box">
+      <h2>Operating Rule for June</h2>
+      <p><strong>Everyone focuses on one shop at a time.</strong> You stay 1 shop ahead by preparing the next shop’s product research, pricing, name, logo direction, branding, policies, and admin setup while the team finishes the current shop.</p>
+      <p><strong>Ruthless reality:</strong> the listing team is not the bottleneck anymore. Your research, pricing, branding decisions, and shop setup are the bottleneck. Protect those blocks every day.</p>
+    </section>
+
+    <h2 class="section-title">Daily Role Allocation</h2>
+    <section class="two-col">
+      <div class="card">
+        <h3>Production Quotas</h3>
+        <table>
+          <thead>
+            <tr><th>Person</th><th>Daily Output</th><th>Includes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Full-time assistant</td><td>8 items/day</td><td>Photo editing, SEO, listing updates, shop updates after items are ready</td></tr>
+            <tr><td>Part-timer</td><td>7 items/day</td><td>Photo editing, SEO, listing creation</td></tr>
+            <tr><td>You</td><td>5 items/day</td><td>Photo editing, SEO, listing creation, plus owner QA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Your Protected Time Blocks</h3>
+        <table>
+          <thead>
+            <tr><th>Block</th><th>Time</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Research + pricing</td><td>2.5–3 hrs/day</td><td>Find 50 products, validate demand, price against competitors</td></tr>
+            <tr><td>Shop building</td><td>1.5–2 hrs/day</td><td>Name, logo direction, banner, sections, policies, branding</td></tr>
+            <tr><td>Team QA</td><td>45–60 mins/day</td><td>Check photos, SEO, titles, tags, pricing, listing accuracy</td></tr>
+            <tr><td>Outsourcing/admin</td><td>45–60 mins/day</td><td>Contractor coordination, access control, SOPs, task delegation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <h2 class="section-title">6-Shop Sprint Plan</h2>
+    <section class="card">
+      <table>
+        <thead>
+          <tr><th>Shop</th><th>Production Window</th><th>Target</th><th>Owner Focus</th><th>Status Goal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="shop-tag">Shop 1</span></td><td>June 4–7</td><td>50 listings</td><td>Finalize Shop 2 research while QAing Shop 1</td><td>Live by June 7</td></tr>
+          <tr><td><span class="shop-tag">Shop 2</span></td><td>June 8–11</td><td>50 listings</td><td>Build Shop 3 brand/admin</td><td>Live by June 11</td></tr>
+          <tr><td><span class="shop-tag">Shop 3</span></td><td>June 12–15</td><td>50 listings</td><td>Prepare Shop 4 product/pricing package</td><td>Live by June 15</td></tr>
+          <tr><td><span class="shop-tag">Shop 4</span></td><td>June 16–19</td><td>50 listings</td><td>Prepare Shop 5 brand/admin</td><td>Live by June 19</td></tr>
+          <tr><td><span class="shop-tag">Shop 5</span></td><td>June 20–23</td><td>50 listings</td><td>Prepare Shop 6 product/pricing package</td><td>Live by June 23</td></tr>
+          <tr><td><span class="shop-tag">Shop 6</span></td><td>June 24–27</td><td>50 listings</td><td>QA all shops and fix weak spots</td><td>Live by June 27</td></tr>
+          <tr><td><span class="shop-tag">Audit</span></td><td>June 28–30</td><td>Cleanup</td><td>Pricing, SEO, branding, shop quality</td><td>All 6 shops stable</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2 class="section-title">June 2026 Calendar</h2>
+    <section class="calendar">
+      <div class="day-name">Mon</div><div class="day-name">Tue</div><div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div><div class="day-name">Sun</div>
+
+      <div class="day"><div class="date">1</div><span class="phase setup">Setup</span><ul><li>Research Shop 1 products</li><li>Start pricing sheet</li><li>Create listing tracker</li><li>Draft shop naming system</li></ul></div>
+      <div class="day"><div class="date">2</div><span class="phase setup">Setup</span><ul><li>Finish Shop 1 product list</li><li>Research Shop 2 direction</li><li>Build shop admin template</li><li>Create photo/SEO SOP</li></ul></div>
+      <div class="day"><div class="date">3</div><span class="phase brand">Admin</span><ul><li>Build Shop 1 shell</li><li>Name, logo direction, banner</li><li>Policies, sections, FAQ</li><li>Prepare first 50-item package</li></ul></div>
+      <div class="day"><div class="date">4</div><span class="phase prod">Shop 1</span><ul><li>Team target: 20 items</li><li>You: 5 items + QA</li><li>Research/pricing Shop 2</li><li>Full-time updates listings as items finish</li></ul></div>
+      <div class="day"><div class="date">5</div><span class="phase prod">Shop 1</span><ul><li>Team target: 20 items</li><li>Shop 1 total goal: 40/50</li><li>Finalize Shop 2 branding</li><li>Check SEO consistency</li></ul></div>
+      <div class="day"><div class="date">6</div><span class="phase prod">Shop 1</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Complete Shop 1 listings</li><li>Start QA fixes</li></ul></div>
+      <div class="day"><div class="date">7</div><span class="phase qa">Launch</span><ul><li>Part-timer off</li><li>Final QA Shop 1</li><li>Publish/complete Shop 1</li><li>Shop 2 package ready</li></ul></div>
+
+      <div class="day"><div class="date">8</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Start Shop 2 production</li><li>Research Shop 3 products</li><li>Review Shop 1 issues</li></ul></div>
+      <div class="day"><div class="date">9</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Shop 2 total goal: 40/50</li><li>Pricing Shop 3</li><li>Logo/banner direction Shop 3</li></ul></div>
+      <div class="day"><div class="date">10</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Finish Shop 2 listings</li><li>Build Shop 3 admin</li><li>Full-time shop updates</li></ul></div>
+      <div class="day"><div class="date">11</div><span class="phase qa">Launch</span><ul><li>QA Shop 2</li><li>Publish/complete Shop 2</li><li>Shop 3 product package ready</li><li>Document mistakes to avoid</li></ul></div>
+      <div class="day"><div class="date">12</div><span class="phase prod">Shop 3</span><ul><li>Team target: 20 items</li><li>Start Shop 3 production</li><li>Research Shop 4</li><li>Check Shop 1–2 SEO</li></ul></div>
+      <div class="day"><div class="date">13</div><span class="phase prod">Shop 3</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Continue Shop 3</li><li>Pricing Shop 4</li></ul></div>
+      <div class="day"><div class="date">14</div><span class="phase prod">Shop 3</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Shop 3 should be near done</li><li>Build Shop 4 branding</li></ul></div>
+
+      <div class="day"><div class="date">15</div><span class="phase qa">Launch</span><ul><li>Finish + QA Shop 3</li><li>Publish/complete Shop 3</li><li>Shop 4 package ready</li><li>Quick audit Shops 1–2</li></ul></div>
+      <div class="day"><div class="date">16</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Start Shop 4 production</li><li>Research Shop 5 products</li><li>Review listing quality</li></ul></div>
+      <div class="day"><div class="date">17</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Shop 4 total goal: 40/50</li><li>Pricing Shop 5</li><li>Prepare Shop 5 admin</li></ul></div>
+      <div class="day"><div class="date">18</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Finish Shop 4 listings</li><li>Full-time shop updates</li><li>Owner QA pass</li></ul></div>
+      <div class="day"><div class="date">19</div><span class="phase qa">Launch</span><ul><li>QA Shop 4</li><li>Publish/complete Shop 4</li><li>Shop 5 package ready</li><li>Fix backlog issues</li></ul></div>
+      <div class="day"><div class="date">20</div><span class="phase prod">Shop 5</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Start Shop 5</li><li>Research Shop 6 products</li></ul></div>
+      <div class="day"><div class="date">21</div><span class="phase prod">Shop 5</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Continue Shop 5</li><li>Pricing Shop 6</li></ul></div>
+
+      <div class="day"><div class="date">22</div><span class="phase prod">Shop 5</span><ul><li>Team target: 20 items</li><li>Shop 5 should finish today</li><li>Build Shop 6 admin</li><li>Full-time shop updates</li></ul></div>
+      <div class="day"><div class="date">23</div><span class="phase qa">Launch</span><ul><li>QA Shop 5</li><li>Publish/complete Shop 5</li><li>Shop 6 package ready</li><li>Audit weak titles/tags</li></ul></div>
+      <div class="day"><div class="date">24</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Start Shop 6 production</li><li>Review all shop branding</li><li>Check pricing consistency</li></ul></div>
+      <div class="day"><div class="date">25</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Shop 6 total goal: 40/50</li><li>Prepare audit checklist</li><li>Fix any admin gaps</li></ul></div>
+      <div class="day"><div class="date">26</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Finish Shop 6 listings</li><li>Full-time shop updates</li><li>Owner QA pass</li></ul></div>
+      <div class="day"><div class="date">27</div><span class="phase qa">Launch</span><ul><li>Part-timer off</li><li>Final QA Shop 6</li><li>Publish/complete Shop 6</li><li>Start full-month audit</li></ul></div>
+      <div class="day"><div class="date">28</div><span class="phase qa">Audit</span><ul><li>Part-timer off</li><li>Audit Shops 1–3</li><li>Fix SEO, photos, prices</li><li>Document what slowed you down</li></ul></div>
+
+      <div class="day"><div class="date">29</div><span class="phase qa">Audit</span><ul><li>Audit Shops 4–6</li><li>Fix policies/branding gaps</li><li>Build July research queue</li><li>Identify next 2 shop niches</li></ul></div>
+      <div class="day"><div class="date">30</div><span class="phase risk">Review</span><ul><li>Final June scorecard</li><li>6 shops live check</li><li>300 listings check</li><li>Lock July sprint plan</li></ul></div>
+    </section>
+
+    <h2 class="section-title">June Success Scorecard</h2>
+    <section class="card">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Target</th><th>Why It Matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Shops live</td><td>6</td><td>Main June commitment</td></tr>
+          <tr><td>Total listings</td><td>300</td><td>6 shops × 50 listings</td></tr>
+          <tr><td>Research buffer</td><td>1 shop ahead at all times</td><td>Prevents team from going idle</td></tr>
+          <tr><td>Daily production</td><td>20 items on full-team days</td><td>Protects speed without chaos</td></tr>
+          <tr><td>QA completion</td><td>Every shop before launch</td><td>Prevents trash listings from going live</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="footer">Built for June 2026: 6 Etsy shops, 300 listings, one-shop-at-a-time sprint model.</p>
+  </main>
+</body>
+</html>
