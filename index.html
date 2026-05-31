@@ -3,385 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>June Etsy 6-Shop Production Calendar</title>
+  <title>June Etsy Command Center</title>
   <style>
-    :root {
-      --bg: #f7f3ee;
-      --card: #ffffff;
-      --ink: #241f1c;
-      --muted: #746b64;
-      --line: #ded3c8;
-      --accent: #9a5f3f;
-      --accent-dark: #6f3f28;
-      --soft: #efe4d8;
-      --green: #dff0df;
-      --yellow: #fff0c2;
-      --red: #f7d7d2;
-      --blue: #dfeaf6;
-      --purple: #eadff6;
+    :root{
+      --bg:#080a12;--panel:#101522;--panel2:#151b2b;--card:#111827;--ink:#f8fafc;--muted:#a8b3c7;--line:rgba(255,255,255,.11);
+      --gold:#f4c76b;--gold2:#c69334;--cyan:#67e8f9;--green:#7ddf9a;--red:#fb7185;--purple:#c084fc;--blue:#93c5fd;
+      --shadow:0 22px 60px rgba(0,0,0,.36);--radius:22px;
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.45;
-    }
-
-    header {
-      padding: 34px 28px 24px;
-      background: linear-gradient(135deg, #fff, var(--soft));
-      border-bottom: 1px solid var(--line);
-    }
-
-    h1, h2, h3 { margin: 0; }
-
-    h1 { font-size: 32px; letter-spacing: -0.8px; }
-
-    .subtitle {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 900px;
-    }
-
-    .wrap {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .summary-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-bottom: 20px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 8px 20px rgba(60, 41, 30, 0.05);
-    }
-
-    .metric {
-      font-size: 30px;
-      font-weight: 800;
-      color: var(--accent-dark);
-      margin-top: 6px;
-    }
-
-    .label {
-      font-size: 13px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .section-title {
-      margin: 30px 0 14px;
-      font-size: 22px;
-    }
-
-    .rule-box {
-      border-left: 5px solid var(--accent);
-      background: #fffaf5;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-
-    th, td {
-      border-bottom: 1px solid var(--line);
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      background: #fbf6f1;
-      color: var(--accent-dark);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-    }
-
-    .day-name {
-      text-align: center;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 8px 0;
-    }
-
-    .day {
-      min-height: 210px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-      position: relative;
-    }
-
-    .date {
-      font-weight: 800;
-      color: var(--accent-dark);
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .phase {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .setup { background: var(--blue); }
-    .prod { background: var(--green); }
-    .qa { background: var(--yellow); }
-    .off { background: #eeeeee; color: #777; }
-    .risk { background: var(--red); }
-    .brand { background: var(--purple); }
-
-    ul {
-      padding-left: 18px;
-      margin: 8px 0 0;
-    }
-
-    li { margin-bottom: 5px; }
-
-    .small { font-size: 12px; color: var(--muted); }
-
-    .shop-tag {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 800;
-      color: white;
-      background: var(--accent);
-      border-radius: 6px;
-      padding: 3px 7px;
-      margin-right: 4px;
-      margin-bottom: 6px;
-    }
-
-    .progress {
-      height: 10px;
-      background: #eee4dc;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .bar {
-      height: 100%;
-      background: var(--accent);
-      width: var(--w);
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .note {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .footer {
-      margin: 28px 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    @media (max-width: 1000px) {
-      .summary-grid, .two-col { grid-template-columns: 1fr 1fr; }
-      .calendar { grid-template-columns: 1fr; }
-      .day-name { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .summary-grid, .two-col { grid-template-columns: 1fr; }
-      header { padding: 24px 18px; }
-      .wrap { padding: 16px; }
-    }
-
-    @media print {
-      body { background: white; }
-      .card, .day { box-shadow: none; break-inside: avoid; }
-      .calendar { grid-template-columns: repeat(7, 1fr); }
-      .day { min-height: 185px; }
-    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(103,232,249,.18),transparent 34%),radial-gradient(circle at 85% 10%,rgba(244,199,107,.20),transparent 28%),linear-gradient(180deg,#080a12 0%,#0b1020 50%,#080a12 100%);color:var(--ink);line-height:1.45;min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(8,10,18,.76);border-bottom:1px solid var(--line)}
+    .nav{max-width:1380px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:12px;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--cyan));display:grid;place-items:center;color:#080a12;font-weight:1000;box-shadow:0 0 35px rgba(244,199,107,.25)}
+    .brand h1{font-size:18px;margin:0;letter-spacing:-.4px}.brand p{margin:0;color:var(--muted);font-size:12px}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a,.btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);text-decoration:none;border-radius:999px;padding:9px 12px;font-weight:800;font-size:12px;cursor:pointer;transition:.18s}.navlinks a:hover,.btn:hover{transform:translateY(-1px);border-color:rgba(244,199,107,.55);background:rgba(244,199,107,.10)}.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;border:0}.btn.danger{background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.35)}
+    .wrap{max-width:1380px;margin:0 auto;padding:28px 22px 60px}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:stretch}.glass{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden}.hero-main{padding:30px;position:relative}.kicker{display:inline-flex;gap:8px;align-items:center;color:var(--gold);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.13em}.hero h2{font-size:46px;line-height:1.02;margin:12px 0 12px;letter-spacing:-1.8px}.hero .sub{color:var(--muted);max-width:820px;font-size:15px}.hero-side{padding:22px;display:flex;flex-direction:column;gap:14px}.deadline{font-size:13px;color:var(--muted)}.big-number{font-size:56px;font-weight:1000;letter-spacing:-2px;color:var(--gold);line-height:1}.grid{display:grid;gap:16px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}.metric{padding:18px;border-radius:18px;background:rgba(17,24,39,.78);border:1px solid var(--line)}.metric .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:900}.metric .value{font-size:32px;font-weight:1000;margin-top:4px}.metric small{color:var(--muted)}
+    .section{margin-top:26px}.section h2{font-size:24px;margin:0 0 12px;letter-spacing:-.6px}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.card{background:rgba(17,24,39,.82);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 14px 35px rgba(0,0,0,.18)}.card h3{margin:0 0 10px;font-size:16px}.muted{color:var(--muted)}
+    .progress{height:12px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:10px}.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:999px;transition:.25s}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.day-name{text-align:center;font-size:11px;font-weight:1000;color:var(--muted);text-transform:uppercase;letter-spacing:.13em}.day{min-height:235px;background:rgba(17,24,39,.84);border:1px solid var(--line);border-radius:18px;padding:13px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}.day::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--gold),var(--cyan));opacity:.85}.date{font-size:18px;font-weight:1000}.pill{display:inline-flex;align-items:center;width:max-content;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}.setup{background:rgba(147,197,253,.16);color:var(--blue)}.prod{background:rgba(125,223,154,.16);color:var(--green)}.qa{background:rgba(244,199,107,.16);color:var(--gold)}.risk{background:rgba(251,113,133,.16);color:var(--red)}.day ul{margin:0;padding-left:18px;color:#dce4f5;font-size:12px}.day li{margin:3px 0}.day-actions{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap}.mini{font-size:11px;padding:7px 9px}.checkrow{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}input[type="checkbox"]{accent-color:#f4c76b}
+    textarea,input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;color:var(--ink);padding:12px;outline:none;font:inherit}textarea{min-height:130px;resize:vertical}input::placeholder,textarea::placeholder{color:#7f8aa0}.note-list{display:grid;gap:10px;margin-top:12px}.note-item{padding:12px;border-radius:15px;background:rgba(255,255,255,.055);border:1px solid var(--line);white-space:pre-wrap}.note-meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;margin-bottom:6px}.shop-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.shop{padding:14px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));border:1px solid var(--line)}.shop strong{display:block;font-size:14px}.shop input{margin-top:10px}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.12em}.quicklinks{display:flex;gap:10px;flex-wrap:wrap}.quicklinks a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:14px;padding:11px 13px;font-weight:900;font-size:13px}.quicklinks a:hover{border-color:rgba(103,232,249,.55)}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;place-items:center;padding:20px;z-index:100}.modal.open{display:grid}.modal-box{width:min(760px,100%);background:#101522;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px}.modal-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.modal-head h3{margin:0}.close{font-size:22px;background:transparent;border:0;color:var(--ink);cursor:pointer}.toast{position:fixed;right:18px;bottom:18px;background:#111827;border:1px solid rgba(244,199,107,.45);color:var(--ink);padding:12px 14px;border-radius:14px;box-shadow:var(--shadow);display:none;z-index:200}.toast.show{display:block}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+    @media(max-width:1050px){.hero,.two{grid-template-columns:1fr}.metrics,.three{grid-template-columns:1fr 1fr}.calendar{grid-template-columns:1fr}.day-name{display:none}.shop-grid{grid-template-columns:1fr 1fr 1fr}}@media(max-width:640px){.metrics,.three,.shop-grid{grid-template-columns:1fr}.hero h2{font-size:34px}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%}.navlinks a,.btn{font-size:11px}.wrap{padding:18px 14px}.hero-main{padding:22px}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>June 2026 Etsy Production Calendar</h1>
-    <p class="subtitle">Goal: launch 6 shops in June. Team works mostly one shop at a time. June 1–3 is protected for product research, pricing, branding, shop setup, SOPs, and admin work before production starts.</p>
-  </header>
-
+  <div class="topbar"><div class="nav"><div class="brand"><div class="logo">J</div><div><h1>June Etsy Command Center</h1><p>6 shops · 300 listings · one-shop sprint model</p></div></div><div class="navlinks"><a href="#calendar">Calendar</a><a href="#notes">Notes</a><a href="#shops">Shop Tracker</a><a href="#links">Links</a><button class="btn primary" onclick="window.print()">Print / PDF</button></div></div></div>
   <main class="wrap">
-    <section class="grid summary-grid">
-      <div class="card">
-        <div class="label">June Shop Goal</div>
-        <div class="metric">6</div>
-        <div class="note">50 listings per shop</div>
-      </div>
-      <div class="card">
-        <div class="label">Total Listings</div>
-        <div class="metric">300</div>
-        <div class="note">6 × 50 listings</div>
-      </div>
-      <div class="card">
-        <div class="label">Daily Editing Quota</div>
-        <div class="metric">20</div>
-        <div class="note">8 full-time + 7 part-time + 5 you</div>
-      </div>
-      <div class="card">
-        <div class="label">Work Rhythm</div>
-        <div class="metric">6/5</div>
-        <div class="note">You + full-time: 6 days. Part-time: 5 days.</div>
-      </div>
+    <section class="hero">
+      <div class="glass hero-main"><div class="kicker">⚡ June Launch Mission</div><h2>Build 6 clean shops without creating chaos.</h2><p class="sub">This dashboard saves notes in your browser, tracks shop completion, opens your important work links, and gives each day one clear production objective. Do not let the pretty design fool you: the bottleneck is still product research, pricing, branding, and shop setup.</p><div class="grid metrics"><div class="metric"><div class="label">Shop Goal</div><div class="value">6</div><small>50 listings each</small></div><div class="metric"><div class="label">Listing Goal</div><div class="value">300</div><small>June total</small></div><div class="metric"><div class="label">Full Team Day</div><div class="value">20</div><small>8 + 7 + 5 items</small></div><div class="metric"><div class="label">PT Off Day</div><div class="value">13</div><small>8 + 5 items</small></div></div></div>
+      <div class="glass hero-side"><div><div class="deadline">Current mission progress</div><div class="big-number" id="progressText">0%</div><div class="progress"><div class="bar" id="progressBar"></div></div></div><div class="card"><h3>Today’s owner rule</h3><p class="muted">Every day you must protect time for product research, pricing, shop branding, admin setup, and outsourcing coordination. If you only edit listings, the whole machine starves next week.</p></div><button class="btn primary" onclick="openModal('global')">+ Add Master Note</button><button class="btn" onclick="exportData()">Export Saved Notes</button><button class="btn danger" onclick="resetData()">Reset Local Data</button></div>
     </section>
 
-    <section class="card rule-box">
-      <h2>Operating Rule for June</h2>
-      <p><strong>Everyone focuses on one shop at a time.</strong> You stay 1 shop ahead by preparing the next shop’s product research, pricing, name, logo direction, branding, policies, and admin setup while the team finishes the current shop.</p>
-      <p><strong>Ruthless reality:</strong> the listing team is not the bottleneck anymore. Your research, pricing, branding decisions, and shop setup are the bottleneck. Protect those blocks every day.</p>
+    <section class="section grid two">
+      <div class="card"><h3>Daily Output Rules</h3><table class="table"><tr><th>Person</th><th>Quota</th><th>Work</th></tr><tr><td>Full-time</td><td>8 items/day</td><td>Photo edit, SEO, listing creation, shop updates after everyone finishes edited items.</td></tr><tr><td>Part-time</td><td>7 items/day</td><td>Photo edit, SEO, listing creation. Works 5 days.</td></tr><tr><td>You</td><td>5 items/day</td><td>Photo edit, SEO, listing creation, plus QA and owner decisions.</td></tr></table></div>
+      <div class="card"><h3>Your Protected Time Allocation</h3><table class="table"><tr><th>Block</th><th>Minimum</th><th>Purpose</th></tr><tr><td>Research + pricing</td><td>2.5–3 hrs</td><td>Product list, demand validation, competitor pricing.</td></tr><tr><td>Shop building</td><td>1.5–2 hrs</td><td>Name, logo, banner, policies, branding, sections.</td></tr><tr><td>QA/team review</td><td>45–60 mins</td><td>Prevent bad listings from going live.</td></tr><tr><td>Outsourcing/admin</td><td>45–60 mins</td><td>Contractors, permissions, SOPs, task delegation.</td></tr></table></div>
     </section>
 
-    <h2 class="section-title">Daily Role Allocation</h2>
-    <section class="two-col">
-      <div class="card">
-        <h3>Production Quotas</h3>
-        <table>
-          <thead>
-            <tr><th>Person</th><th>Daily Output</th><th>Includes</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Full-time assistant</td><td>8 items/day</td><td>Photo editing, SEO, listing updates, shop updates after items are ready</td></tr>
-            <tr><td>Part-timer</td><td>7 items/day</td><td>Photo editing, SEO, listing creation</td></tr>
-            <tr><td>You</td><td>5 items/day</td><td>Photo editing, SEO, listing creation, plus owner QA</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card">
-        <h3>Your Protected Time Blocks</h3>
-        <table>
-          <thead>
-            <tr><th>Block</th><th>Time</th><th>Purpose</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Research + pricing</td><td>2.5–3 hrs/day</td><td>Find 50 products, validate demand, price against competitors</td></tr>
-            <tr><td>Shop building</td><td>1.5–2 hrs/day</td><td>Name, logo direction, banner, sections, policies, branding</td></tr>
-            <tr><td>Team QA</td><td>45–60 mins/day</td><td>Check photos, SEO, titles, tags, pricing, listing accuracy</td></tr>
-            <tr><td>Outsourcing/admin</td><td>45–60 mins/day</td><td>Contractor coordination, access control, SOPs, task delegation</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <section class="section" id="links"><h2>Quick Redirect Buttons</h2><div class="card"><p class="muted">Edit these URLs inside the HTML once, then upload to GitHub again.</p><div class="quicklinks"><a href="https://www.etsy.com/your/shops" target="_blank">🛍️ Etsy Shops</a><a href="https://www.etsy.com/your/listings" target="_blank">📝 Etsy Listings</a><a href="https://github.com/" target="_blank">🐙 GitHub</a><a href="https://docs.google.com/spreadsheets/" target="_blank">📊 Product Sheet</a><a href="https://drive.google.com/" target="_blank">🗂️ Google Drive</a><a href="#notes">🧠 Notes</a></div></div></section>
 
-    <h2 class="section-title">6-Shop Sprint Plan</h2>
-    <section class="card">
-      <table>
-        <thead>
-          <tr><th>Shop</th><th>Production Window</th><th>Target</th><th>Owner Focus</th><th>Status Goal</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="shop-tag">Shop 1</span></td><td>June 4–7</td><td>50 listings</td><td>Finalize Shop 2 research while QAing Shop 1</td><td>Live by June 7</td></tr>
-          <tr><td><span class="shop-tag">Shop 2</span></td><td>June 8–11</td><td>50 listings</td><td>Build Shop 3 brand/admin</td><td>Live by June 11</td></tr>
-          <tr><td><span class="shop-tag">Shop 3</span></td><td>June 12–15</td><td>50 listings</td><td>Prepare Shop 4 product/pricing package</td><td>Live by June 15</td></tr>
-          <tr><td><span class="shop-tag">Shop 4</span></td><td>June 16–19</td><td>50 listings</td><td>Prepare Shop 5 brand/admin</td><td>Live by June 19</td></tr>
-          <tr><td><span class="shop-tag">Shop 5</span></td><td>June 20–23</td><td>50 listings</td><td>Prepare Shop 6 product/pricing package</td><td>Live by June 23</td></tr>
-          <tr><td><span class="shop-tag">Shop 6</span></td><td>June 24–27</td><td>50 listings</td><td>QA all shops and fix weak spots</td><td>Live by June 27</td></tr>
-          <tr><td><span class="shop-tag">Audit</span></td><td>June 28–30</td><td>Cleanup</td><td>Pricing, SEO, branding, shop quality</td><td>All 6 shops stable</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <section class="section" id="shops"><h2>6-Shop Completion Tracker</h2><div class="shop-grid" id="shopGrid"></div></section>
 
-    <h2 class="section-title">June 2026 Calendar</h2>
-    <section class="calendar">
-      <div class="day-name">Mon</div><div class="day-name">Tue</div><div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div><div class="day-name">Sun</div>
+    <section class="section" id="calendar"><h2>June Calendar</h2><div class="calendar" id="calendarGrid"></div></section>
 
-      <div class="day"><div class="date">1</div><span class="phase setup">Setup</span><ul><li>Research Shop 1 products</li><li>Start pricing sheet</li><li>Create listing tracker</li><li>Draft shop naming system</li></ul></div>
-      <div class="day"><div class="date">2</div><span class="phase setup">Setup</span><ul><li>Finish Shop 1 product list</li><li>Research Shop 2 direction</li><li>Build shop admin template</li><li>Create photo/SEO SOP</li></ul></div>
-      <div class="day"><div class="date">3</div><span class="phase brand">Admin</span><ul><li>Build Shop 1 shell</li><li>Name, logo direction, banner</li><li>Policies, sections, FAQ</li><li>Prepare first 50-item package</li></ul></div>
-      <div class="day"><div class="date">4</div><span class="phase prod">Shop 1</span><ul><li>Team target: 20 items</li><li>You: 5 items + QA</li><li>Research/pricing Shop 2</li><li>Full-time updates listings as items finish</li></ul></div>
-      <div class="day"><div class="date">5</div><span class="phase prod">Shop 1</span><ul><li>Team target: 20 items</li><li>Shop 1 total goal: 40/50</li><li>Finalize Shop 2 branding</li><li>Check SEO consistency</li></ul></div>
-      <div class="day"><div class="date">6</div><span class="phase prod">Shop 1</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Complete Shop 1 listings</li><li>Start QA fixes</li></ul></div>
-      <div class="day"><div class="date">7</div><span class="phase qa">Launch</span><ul><li>Part-timer off</li><li>Final QA Shop 1</li><li>Publish/complete Shop 1</li><li>Shop 2 package ready</li></ul></div>
+    <section class="section grid two" id="notes"><div class="card"><h2>Master Notes</h2><textarea id="masterNote" placeholder="Write meeting notes, blockers, product ideas, outsourcing reminders..."></textarea><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn primary" onclick="saveMasterNote()">Save Note</button><button class="btn" onclick="copyNotes()">Copy All Notes</button></div><div class="note-list" id="noteList"></div></div><div class="card"><h2>Outsourcing / Admin Tracker</h2><p class="muted">Keep this legitimate: contractors, permissions, tasks, SOPs. Do not build the business around borrowed identities.</p><textarea id="outsourceNote" placeholder="Name / role / access needed / assigned shop / follow-up date..."></textarea><button class="btn primary" style="margin-top:10px" onclick="saveOutsource()">Save Outsourcing Note</button><div class="note-list" id="outsourceList"></div></div></section>
 
-      <div class="day"><div class="date">8</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Start Shop 2 production</li><li>Research Shop 3 products</li><li>Review Shop 1 issues</li></ul></div>
-      <div class="day"><div class="date">9</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Shop 2 total goal: 40/50</li><li>Pricing Shop 3</li><li>Logo/banner direction Shop 3</li></ul></div>
-      <div class="day"><div class="date">10</div><span class="phase prod">Shop 2</span><ul><li>Team target: 20 items</li><li>Finish Shop 2 listings</li><li>Build Shop 3 admin</li><li>Full-time shop updates</li></ul></div>
-      <div class="day"><div class="date">11</div><span class="phase qa">Launch</span><ul><li>QA Shop 2</li><li>Publish/complete Shop 2</li><li>Shop 3 product package ready</li><li>Document mistakes to avoid</li></ul></div>
-      <div class="day"><div class="date">12</div><span class="phase prod">Shop 3</span><ul><li>Team target: 20 items</li><li>Start Shop 3 production</li><li>Research Shop 4</li><li>Check Shop 1–2 SEO</li></ul></div>
-      <div class="day"><div class="date">13</div><span class="phase prod">Shop 3</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Continue Shop 3</li><li>Pricing Shop 4</li></ul></div>
-      <div class="day"><div class="date">14</div><span class="phase prod">Shop 3</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Shop 3 should be near done</li><li>Build Shop 4 branding</li></ul></div>
-
-      <div class="day"><div class="date">15</div><span class="phase qa">Launch</span><ul><li>Finish + QA Shop 3</li><li>Publish/complete Shop 3</li><li>Shop 4 package ready</li><li>Quick audit Shops 1–2</li></ul></div>
-      <div class="day"><div class="date">16</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Start Shop 4 production</li><li>Research Shop 5 products</li><li>Review listing quality</li></ul></div>
-      <div class="day"><div class="date">17</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Shop 4 total goal: 40/50</li><li>Pricing Shop 5</li><li>Prepare Shop 5 admin</li></ul></div>
-      <div class="day"><div class="date">18</div><span class="phase prod">Shop 4</span><ul><li>Team target: 20 items</li><li>Finish Shop 4 listings</li><li>Full-time shop updates</li><li>Owner QA pass</li></ul></div>
-      <div class="day"><div class="date">19</div><span class="phase qa">Launch</span><ul><li>QA Shop 4</li><li>Publish/complete Shop 4</li><li>Shop 5 package ready</li><li>Fix backlog issues</li></ul></div>
-      <div class="day"><div class="date">20</div><span class="phase prod">Shop 5</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Start Shop 5</li><li>Research Shop 6 products</li></ul></div>
-      <div class="day"><div class="date">21</div><span class="phase prod">Shop 5</span><ul><li>Part-timer off</li><li>You + full-time target: 13 items</li><li>Continue Shop 5</li><li>Pricing Shop 6</li></ul></div>
-
-      <div class="day"><div class="date">22</div><span class="phase prod">Shop 5</span><ul><li>Team target: 20 items</li><li>Shop 5 should finish today</li><li>Build Shop 6 admin</li><li>Full-time shop updates</li></ul></div>
-      <div class="day"><div class="date">23</div><span class="phase qa">Launch</span><ul><li>QA Shop 5</li><li>Publish/complete Shop 5</li><li>Shop 6 package ready</li><li>Audit weak titles/tags</li></ul></div>
-      <div class="day"><div class="date">24</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Start Shop 6 production</li><li>Review all shop branding</li><li>Check pricing consistency</li></ul></div>
-      <div class="day"><div class="date">25</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Shop 6 total goal: 40/50</li><li>Prepare audit checklist</li><li>Fix any admin gaps</li></ul></div>
-      <div class="day"><div class="date">26</div><span class="phase prod">Shop 6</span><ul><li>Team target: 20 items</li><li>Finish Shop 6 listings</li><li>Full-time shop updates</li><li>Owner QA pass</li></ul></div>
-      <div class="day"><div class="date">27</div><span class="phase qa">Launch</span><ul><li>Part-timer off</li><li>Final QA Shop 6</li><li>Publish/complete Shop 6</li><li>Start full-month audit</li></ul></div>
-      <div class="day"><div class="date">28</div><span class="phase qa">Audit</span><ul><li>Part-timer off</li><li>Audit Shops 1–3</li><li>Fix SEO, photos, prices</li><li>Document what slowed you down</li></ul></div>
-
-      <div class="day"><div class="date">29</div><span class="phase qa">Audit</span><ul><li>Audit Shops 4–6</li><li>Fix policies/branding gaps</li><li>Build July research queue</li><li>Identify next 2 shop niches</li></ul></div>
-      <div class="day"><div class="date">30</div><span class="phase risk">Review</span><ul><li>Final June scorecard</li><li>6 shops live check</li><li>300 listings check</li><li>Lock July sprint plan</li></ul></div>
-    </section>
-
-    <h2 class="section-title">June Success Scorecard</h2>
-    <section class="card">
-      <table>
-        <thead>
-          <tr><th>Metric</th><th>Target</th><th>Why It Matters</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Shops live</td><td>6</td><td>Main June commitment</td></tr>
-          <tr><td>Total listings</td><td>300</td><td>6 shops × 50 listings</td></tr>
-          <tr><td>Research buffer</td><td>1 shop ahead at all times</td><td>Prevents team from going idle</td></tr>
-          <tr><td>Daily production</td><td>20 items on full-team days</td><td>Protects speed without chaos</td></tr>
-          <tr><td>QA completion</td><td>Every shop before launch</td><td>Prevents trash listings from going live</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <p class="footer">Built for June 2026: 6 Etsy shops, 300 listings, one-shop-at-a-time sprint model.</p>
+    <p class="footer">Local data is saved in this browser using localStorage. GitHub Pages cannot save data across devices unless you add a backend.</p>
   </main>
+
+  <div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">Add Note</h3><button class="close" onclick="closeModal()">×</button></div><textarea id="modalText" placeholder="Add note..."></textarea><div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="saveModalNote()">Save</button></div></div></div><div class="toast" id="toast">Saved</div>
+
+  <script>
+    const days=[
+      [1,'Setup','setup',['Research Shop 1 products','Start pricing sheet','Create listing tracker','Draft shop naming system']],
+      [2,'Setup','setup',['Finish Shop 1 product list','Research Shop 2 direction','Build shop admin template','Create photo/SEO SOP']],
+      [3,'Admin','setup',['Build Shop 1 shell','Name, logo direction, banner','Policies, sections, FAQ','Prepare first 50-item package']],
+      [4,'Shop 1','prod',['Team target: 20 items','You: 5 items + QA','Research/pricing Shop 2','Full-time updates listings']],
+      [5,'Shop 1','prod',['Team target: 20 items','Shop 1 goal: 40/50','Finalize Shop 2 branding','Check SEO consistency']],
+      [6,'Shop 1','prod',['Part-timer off','You + full-time target: 13 items','Complete Shop 1 listings','Start QA fixes']],
+      [7,'Launch','qa',['Part-timer off','Final QA Shop 1','Publish Shop 1','Shop 2 package ready']],
+      [8,'Shop 2','prod',['Team target: 20 items','Start Shop 2 production','Research Shop 3 products','Review Shop 1 issues']],
+      [9,'Shop 2','prod',['Team target: 20 items','Shop 2 goal: 40/50','Pricing Shop 3','Logo/banner direction Shop 3']],
+      [10,'Shop 2','prod',['Team target: 20 items','Finish Shop 2 listings','Build Shop 3 admin','Full-time shop updates']],
+      [11,'Launch','qa',['QA Shop 2','Publish Shop 2','Shop 3 product package ready','Document mistakes']],
+      [12,'Shop 3','prod',['Team target: 20 items','Start Shop 3 production','Research Shop 4','Check Shop 1–2 SEO']],
+      [13,'Shop 3','prod',['Part-timer off','You + full-time target: 13 items','Continue Shop 3','Pricing Shop 4']],
+      [14,'Shop 3','prod',['Part-timer off','You + full-time target: 13 items','Shop 3 near done','Build Shop 4 branding']],
+      [15,'Launch','qa',['Finish + QA Shop 3','Publish Shop 3','Shop 4 package ready','Quick audit Shops 1–2']],
+      [16,'Shop 4','prod',['Team target: 20 items','Start Shop 4 production','Research Shop 5 products','Review listing quality']],
+      [17,'Shop 4','prod',['Team target: 20 items','Shop 4 goal: 40/50','Pricing Shop 5','Prepare Shop 5 admin']],
+      [18,'Shop 4','prod',['Team target: 20 items','Finish Shop 4 listings','Full-time shop updates','Owner QA pass']],
+      [19,'Launch','qa',['QA Shop 4','Publish Shop 4','Shop 5 package ready','Fix backlog issues']],
+      [20,'Shop 5','prod',['Part-timer off','You + full-time target: 13 items','Start Shop 5','Research Shop 6 products']],
+      [21,'Shop 5','prod',['Part-timer off','You + full-time target: 13 items','Continue Shop 5','Pricing Shop 6']],
+      [22,'Shop 5','prod',['Team target: 20 items','Shop 5 should finish','Build Shop 6 admin','Full-time shop updates']],
+      [23,'Launch','qa',['QA Shop 5','Publish Shop 5','Shop 6 package ready','Audit weak titles/tags']],
+      [24,'Shop 6','prod',['Team target: 20 items','Start Shop 6 production','Review all shop branding','Check pricing consistency']],
+      [25,'Shop 6','prod',['Team target: 20 items','Shop 6 goal: 40/50','Prepare audit checklist','Fix admin gaps']],
+      [26,'Shop 6','prod',['Team target: 20 items','Finish Shop 6 listings','Full-time shop updates','Owner QA pass']],
+      [27,'Launch','qa',['Part-timer off','Final QA Shop 6','Publish Shop 6','Start full-month audit']],
+      [28,'Audit','qa',['Part-timer off','Audit Shops 1–3','Fix SEO, photos, prices','Document slowdown causes']],
+      [29,'Audit','qa',['Audit Shops 4–6','Fix policies/branding gaps','Build July research queue','Identify next 2 niches']],
+      [30,'Review','risk',['Final June scorecard','6 shops live check','300 listings check','Lock July sprint plan']]
+    ];
+    const storeKey='juneEtsyEliteDashboardV1';
+    let state=JSON.parse(localStorage.getItem(storeKey)||'{"doneDays":{},"shops":{},"notes":[],"outsourcing":[],"dayNotes":{}}');
+    let currentNoteTarget='global';
+    function persist(){localStorage.setItem(storeKey,JSON.stringify(state));updateProgress();}
+    function toast(msg='Saved'){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
+    function renderCalendar(){const grid=document.getElementById('calendarGrid');grid.innerHTML=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="day-name">${d}</div>`).join('');days.forEach(d=>{const [num,label,cls,tasks]=d;const checked=state.doneDays[num]?'checked':'';const noteCount=(state.dayNotes[num]||[]).length;grid.insertAdjacentHTML('beforeend',`<div class="day"><div class="date">${num}</div><span class="pill ${cls}">${label}</span><ul>${tasks.map(t=>`<li>${t}</li>`).join('')}</ul><label class="checkrow"><input type="checkbox" ${checked} onchange="toggleDay(${num},this.checked)"> Mark day complete</label><div class="day-actions"><button class="btn mini" onclick="openModal('day-${num}')">+ Note ${noteCount?`(${noteCount})`:''}</button><button class="btn mini" onclick="location.hash='notes'">Open Notes</button></div></div>`)});}
+    function renderShops(){const grid=document.getElementById('shopGrid');grid.innerHTML='';for(let i=1;i<=6;i++){const s=state.shops[i]||{};grid.insertAdjacentHTML('beforeend',`<div class="shop"><strong>Shop ${i}</strong><span class="muted">50 listings</span><label class="checkrow"><input type="checkbox" ${s.research?'checked':''} onchange="setShop(${i},'research',this.checked)"> Research ready</label><label class="checkrow"><input type="checkbox" ${s.brand?'checked':''} onchange="setShop(${i},'brand',this.checked)"> Branding/admin ready</label><label class="checkrow"><input type="checkbox" ${s.listings?'checked':''} onchange="setShop(${i},'listings',this.checked)"> 50 listings done</label><label class="checkrow"><input type="checkbox" ${s.live?'checked':''} onchange="setShop(${i},'live',this.checked)"> Live</label><input placeholder="Shop name" value="${s.name||''}" onchange="setShop(${i},'name',this.value)"></div>`)}updateProgress();}
+    function toggleDay(n,v){state.doneDays[n]=v;persist();toast('Day updated')}
+    function setShop(i,k,v){state.shops[i]=state.shops[i]||{};state.shops[i][k]=v;persist();toast('Shop updated')}
+    function updateProgress(){let live=0;for(let i=1;i<=6;i++){if(state.shops[i]?.live)live++;}const pct=Math.round((live/6)*100);document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%';}
+    function openModal(target){currentNoteTarget=target;document.getElementById('modalTitle').textContent=target.startsWith('day-')?'Add Note for June '+target.split('-')[1]:'Add Master Note';document.getElementById('modalText').value='';document.getElementById('modal').classList.add('open')}
+    function closeModal(){document.getElementById('modal').classList.remove('open')}
+    function saveModalNote(){const txt=document.getElementById('modalText').value.trim();if(!txt)return;const note={text:txt,date:new Date().toLocaleString()};if(currentNoteTarget.startsWith('day-')){const n=currentNoteTarget.split('-')[1];state.dayNotes[n]=state.dayNotes[n]||[];state.dayNotes[n].unshift(note);}else state.notes.unshift(note);persist();closeModal();renderNotes();renderCalendar();toast('Note saved')}
+    function saveMasterNote(){const txt=document.getElementById('masterNote').value.trim();if(!txt)return;state.notes.unshift({text:txt,date:new Date().toLocaleString()});document.getElementById('masterNote').value='';persist();renderNotes();toast('Note saved')}
+    function saveOutsource(){const txt=document.getElementById('outsourceNote').value.trim();if(!txt)return;state.outsourcing.unshift({text:txt,date:new Date().toLocaleString()});document.getElementById('outsourceNote').value='';persist();renderNotes();toast('Outsourcing note saved')}
+    function renderNotes(){const nl=document.getElementById('noteList');nl.innerHTML=state.notes.map((n,i)=>`<div class="note-item"><div class="note-meta"><span>${n.date}</span><button class="btn mini" onclick="deleteNote('notes',${i})">Delete</button></div>${escapeHtml(n.text)}</div>`).join('')||'<p class="muted">No notes yet.</p>';const ol=document.getElementById('outsourceList');ol.innerHTML=state.outsourcing.map((n,i)=>`<div class="note-item"><div class="note-meta"><span>${n.date}</span><button class="btn mini" onclick="deleteNote('outsourcing',${i})">Delete</button></div>${escapeHtml(n.text)}</div>`).join('')||'<p class="muted">No outsourcing notes yet.</p>';}
+    function deleteNote(type,i){state[type].splice(i,1);persist();renderNotes();toast('Deleted')}
+    function copyNotes(){navigator.clipboard.writeText(JSON.stringify(state,null,2));toast('Copied data')}
+    function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='june-dashboard-notes.json';a.click();URL.revokeObjectURL(url)}
+    function resetData(){if(confirm('This clears notes and checkmarks saved in this browser. Continue?')){localStorage.removeItem(storeKey);location.reload();}}
+    function escapeHtml(str){return str.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+    renderCalendar();renderShops();renderNotes();updateProgress();
+  </script>
 </body>
 </html>
